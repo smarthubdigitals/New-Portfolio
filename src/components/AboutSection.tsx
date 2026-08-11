@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { MapPin, Check, Sparkles } from 'lucide-react';
 import { siteConfig } from '../config/siteData';
 
 export const AboutSection: React.FC = () => {
+  useEffect(() => {
+    // Clean up any lingering local storage overrides from previous sessions
+    localStorage.removeItem('custom_profile_image');
+  }, []);
+
   return (
     <section id="about" className="py-20 bg-[#F8FAFC] text-slate-900 relative border-b border-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -22,6 +27,12 @@ export const AboutSection: React.FC = () => {
                     alt={`${siteConfig.name} - ${siteConfig.profession}`}
                     className="w-full h-full object-cover"
                     referrerPolicy="no-referrer"
+                    onError={(e) => {
+                      const target = e.currentTarget;
+                      if (target.src !== '/profile.jpg') {
+                        target.src = '/profile.jpg';
+                      }
+                    }}
                   />
                 </div>
 
