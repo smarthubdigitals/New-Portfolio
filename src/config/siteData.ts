@@ -1,5 +1,5 @@
 import { ServiceItem, PortfolioItem, ProcessStep, WhyReason } from '../types';
-import profileImg from '../assets/profile.jpg';
+import { profileImageBase64 } from '../assets/profileBase64';
 
 export const siteConfig = {
   // Personal & Brand Information
@@ -9,7 +9,7 @@ export const siteConfig = {
   profession: "Digital Skills Specialist / Digital Solutions Provider",
   location: "Tamale, Ghana 🇬🇭",
   email: "abdulwaheed.digital@gmail.com", // Replace with Abdul's email
-  profileImage: profileImg,
+  profileImage: profileImageBase64,
   whatsappNumber: "233500000000", // Format: Country code without + (e.g. 233541234567)
   whatsappDisplayNumber: "+233 50 000 0000",
   availableForFreelance: true,

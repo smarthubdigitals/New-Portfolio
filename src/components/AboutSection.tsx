@@ -26,13 +26,6 @@ export const AboutSection: React.FC = () => {
                     src={siteConfig.profileImage}
                     alt={`${siteConfig.name} - ${siteConfig.profession}`}
                     className="w-full h-full object-cover"
-                    referrerPolicy="no-referrer"
-                    onError={(e) => {
-                      const target = e.currentTarget;
-                      if (target.src !== '/profile.jpg') {
-                        target.src = '/profile.jpg';
-                      }
-                    }}
                   />
                 </div>
 
