@@ -57,8 +57,11 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedServiceP
 
     setIsSubmitting(true);
 
+    let apiSuccess = false;
+    let successMessage = '';
+
+    // 1. Submit to custom backend API (/api/contact)
     try {
-      // 1. Submit to custom backend API (/api/contact)
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: {
@@ -67,60 +70,70 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedServiceP
         body: JSON.stringify(formData),
       });
 
-      const data = await res.json();
-
-      // 2. Also forward to Web3Forms if an access key is set
-      const web3Key = siteConfig.emailIntegration.web3formsAccessKey;
-      if (web3Key && web3Key !== 'YOUR_WEB3FORMS_ACCESS_KEY') {
-        try {
-          await fetch('https://api.web3forms.com/submit', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              access_key: web3Key,
-              subject: `New Project Request: ${formData.serviceNeeded} - ${formData.businessName || formData.fullName}`,
-              from_name: formData.fullName,
-              to_email: siteConfig.email,
-              ...formData,
-            }),
-          });
-        } catch (wErr) {
-          console.warn('Web3Forms optional sync failed, fallback to local API response', wErr);
+      if (res.ok) {
+        const data = await res.json();
+        if (data.success) {
+          apiSuccess = true;
+          successMessage = data.message || `Thank you, ${formData.fullName}! Your project request has been submitted successfully.`;
         }
       }
+    } catch (apiErr) {
+      console.warn('Backend API submission note:', apiErr);
+    }
 
-      if (res.ok && data.success) {
-        setStatusMessage({
-          type: 'success',
-          text: data.message || `Thank you, ${formData.fullName}! Your project request has been sent successfully. Abdul Waheed will reach out to you via WhatsApp or email soon.`,
+    // 2. Also forward to Web3Forms if an access key is configured
+    const web3Key = siteConfig.emailIntegration.web3formsAccessKey;
+    if (web3Key && web3Key !== 'YOUR_WEB3FORMS_ACCESS_KEY') {
+      try {
+        const web3FormData = new FormData();
+        web3FormData.append('access_key', web3Key);
+        web3FormData.append('name', formData.fullName);
+        web3FormData.append('email', formData.email || 'smarthubdigitals@gmail.com');
+        web3FormData.append('phone', formData.phoneWhatsapp);
+        web3FormData.append('business_name', formData.businessName || 'N/A');
+        web3FormData.append('service_needed', formData.serviceNeeded);
+        web3FormData.append('message', formData.projectDetails);
+        web3FormData.append('subject', `New Project Request from ${formData.fullName} - ${formData.serviceNeeded}`);
+
+        const wRes = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json'
+          },
+          body: web3FormData,
         });
-        // Reset form
-        setFormData({
-          fullName: '',
-          email: '',
-          phoneWhatsapp: '',
-          businessName: '',
-          serviceNeeded: 'Social Media Graphics & Promotional Flyers',
-          projectDetails: '',
-          honeypot: '',
-        });
-      } else {
-        setStatusMessage({
-          type: 'error',
-          text: data.error || 'Failed to submit form. Please contact Abdul via WhatsApp directly.',
-        });
+
+        if (wRes.ok) {
+          apiSuccess = true;
+        }
+      } catch (wErr) {
+        console.warn('Web3Forms optional sync note:', wErr);
       }
-    } catch (err) {
-      console.error('Contact submission error:', err);
+    }
+
+    if (apiSuccess) {
+      setStatusMessage({
+        type: 'success',
+        text: successMessage || `Thank you, ${formData.fullName}! Your project request for "${formData.serviceNeeded}" has been received. Abdul Waheed will reach out to you via WhatsApp or email shortly.`,
+      });
+      // Reset form
+      setFormData({
+        fullName: '',
+        email: '',
+        phoneWhatsapp: '',
+        businessName: '',
+        serviceNeeded: 'Social Media Graphics & Promotional Flyers',
+        projectDetails: '',
+        honeypot: '',
+      });
+    } else {
       setStatusMessage({
         type: 'error',
-        text: 'A network error occurred. Please send a direct message on WhatsApp instead.',
+        text: 'Failed to submit form. Please send a direct message on WhatsApp instead.',
       });
-    } finally {
-      setIsSubmitting(false);
     }
+
+    setIsSubmitting(false);
   };
 
   const whatsappMessage = `Hi Abdul, my name is ${formData.fullName || '[My Name]'}. I am interested in your "${formData.serviceNeeded}" service for ${formData.businessName || 'my business'}. Details: ${formData.projectDetails || 'Let us discuss'}.`;

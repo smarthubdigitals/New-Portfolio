@@ -8,9 +8,30 @@ async function startServer() {
 
   app.use(express.json());
 
+  // In-memory store for contact form submissions
+  const receivedMessages: Array<{
+    id: string;
+    fullName: string;
+    email?: string;
+    phoneWhatsapp: string;
+    businessName?: string;
+    serviceNeeded: string;
+    projectDetails: string;
+    receivedAt: string;
+  }> = [];
+
   // Health check API route
   app.get("/api/health", (req, res) => {
     res.json({ status: "ok", timestamp: new Date().toISOString() });
+  });
+
+  // Get all received messages API endpoint
+  app.get("/api/messages", (req, res) => {
+    res.json({
+      success: true,
+      count: receivedMessages.length,
+      messages: receivedMessages,
+    });
   });
 
   // Contact Form Submission Endpoint
@@ -48,23 +69,31 @@ async function startServer() {
         });
       }
 
+      const newMsg = {
+        id: `msg_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`,
+        fullName: String(fullName).trim(),
+        email: email ? String(email).trim() : undefined,
+        phoneWhatsapp: String(phoneWhatsapp).trim(),
+        businessName: businessName ? String(businessName).trim() : undefined,
+        serviceNeeded: String(serviceNeeded).trim(),
+        projectDetails: String(projectDetails).trim(),
+        receivedAt: new Date().toISOString()
+      };
+
+      receivedMessages.unshift(newMsg);
+
       console.log("=== NEW PROJECT INQUIRY FOR ABDUL WAHEED ===");
-      console.log(`From: ${fullName} (${email || 'No email provided'})`);
-      console.log(`WhatsApp/Phone: ${phoneWhatsapp}`);
-      console.log(`Business Name: ${businessName || 'N/A'}`);
-      console.log(`Service Requested: ${serviceNeeded}`);
-      console.log(`Project Details: ${projectDetails}`);
+      console.log(`From: ${newMsg.fullName} (${newMsg.email || 'No email provided'})`);
+      console.log(`WhatsApp/Phone: ${newMsg.phoneWhatsapp}`);
+      console.log(`Business Name: ${newMsg.businessName || 'N/A'}`);
+      console.log(`Service Requested: ${newMsg.serviceNeeded}`);
+      console.log(`Project Details: ${newMsg.projectDetails}`);
       console.log("============================================");
 
       return res.status(200).json({
         success: true,
         message: `Thank you, ${fullName}! Your project request for "${serviceNeeded}" has been logged successfully. Abdul Waheed will review your details and contact you via WhatsApp (${phoneWhatsapp}) or email shortly.`,
-        data: {
-          fullName,
-          phoneWhatsapp,
-          serviceNeeded,
-          receivedAt: new Date().toISOString()
-        }
+        data: newMsg
       });
     } catch (error: any) {
       console.error("Error handling contact API:", error);
