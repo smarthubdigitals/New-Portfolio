@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Send, MessageCircle, CheckCircle2, AlertCircle, HelpCircle, Loader2 } from 'lucide-react';
+import { Send, MessageCircle, CheckCircle2, AlertCircle, Loader2 } from 'lucide-react';
 import { siteConfig } from '../config/siteData';
 import { ContactFormData, ServiceType } from '../types';
-import { EmailSetupModal } from './EmailSetupModal';
 
 interface ContactSectionProps {
   selectedServicePrefill?: ServiceType | '';
@@ -21,7 +20,6 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedServiceP
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [statusMessage, setStatusMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
-  const [showSetupModal, setShowSetupModal] = useState(false);
 
   useEffect(() => {
     if (selectedServicePrefill) {
@@ -347,19 +345,6 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedServiceP
 
             </form>
 
-            {/* Email Config Helper Link */}
-            <div className="mt-4 pt-3 border-t border-slate-800 flex items-center justify-between text-[11px] text-slate-400">
-              <span>Forms delivered directly to email</span>
-              <button
-                type="button"
-                onClick={() => setShowSetupModal(true)}
-                className="text-blue-400 hover:underline flex items-center gap-1 cursor-pointer font-bold"
-              >
-                <HelpCircle className="w-3.5 h-3.5" />
-                <span>Email Setup Guide</span>
-              </button>
-            </div>
-
           </div>
 
           {/* Right Side: WhatsApp Instant Connect & Direct Info */}
@@ -429,9 +414,6 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedServiceP
         </div>
 
       </div>
-
-      {/* Email Integration Modal */}
-      <EmailSetupModal isOpen={showSetupModal} onClose={() => setShowSetupModal(false)} />
     </section>
   );
 };
