@@ -55,3 +55,12 @@ export interface WhyReason {
   description: string;
   iconName: string;
 }
+
+export interface FaqItem {
+  id: string;
+  category: 'timelines' | 'pricing' | 'delivery' | 'general';
+  categoryLabel: string;
+  question: string;
+  answer: string;
+  highlightText?: string;
+}

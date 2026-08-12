@@ -7,6 +7,7 @@ import { PortfolioSection } from './components/PortfolioSection';
 import { AboutSection } from './components/AboutSection';
 import { WhyWorkWithMe } from './components/WhyWorkWithMe';
 import { ProcessSection } from './components/ProcessSection';
+import { FaqSection } from './components/FaqSection';
 import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
 import { StickyMobileCTA } from './components/StickyMobileCTA';
@@ -67,6 +68,9 @@ export default function App() {
 
         {/* 4-Step Process Section */}
         <ProcessSection />
+
+        {/* Accordion FAQ Section */}
+        <FaqSection />
 
         {/* Working Contact Form Section */}
         <ContactSection

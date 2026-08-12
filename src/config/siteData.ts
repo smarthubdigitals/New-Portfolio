@@ -1,4 +1,4 @@
-import { ServiceItem, PortfolioItem, ProcessStep, WhyReason } from '../types';
+import { ServiceItem, PortfolioItem, ProcessStep, WhyReason, FaqItem } from '../types';
 import { profileImageBase64 } from '../assets/profileBase64';
 
 export const siteConfig = {
@@ -260,3 +260,94 @@ export const processStepsData: ProcessStep[] = [
     iconName: "CheckCircle2"
   }
 ];
+
+export const faqData: FaqItem[] = [
+  // Timelines
+  {
+    id: "faq-timeline-flyers",
+    category: "timelines",
+    categoryLabel: "Timelines & Deadlines",
+    question: "How long does it take to design promotional flyers and social media graphics?",
+    answer: "Standard flyer designs and social media graphics are typically delivered within 24 to 48 hours after receiving your content details (text, logos, phone numbers, and offers). Urgent same-day turnaround is also available upon request for time-sensitive events or announcements.",
+    highlightText: "Typical turnaround: 24 – 48 Hours"
+  },
+  {
+    id: "faq-timeline-videos",
+    category: "timelines",
+    categoryLabel: "Timelines & Deadlines",
+    question: "What is the turnaround time for short-form promotional videos and AI content?",
+    answer: "Promotional video reels, TikTok/Instagram video edits, and AI visual content usually take 2 to 4 business days. This allows sufficient time for script review, AI scene generation, video editing, voiceover sync, and color grading.",
+    highlightText: "Typical turnaround: 2 – 4 Days"
+  },
+  {
+    id: "faq-timeline-website",
+    category: "timelines",
+    categoryLabel: "Timelines & Deadlines",
+    question: "How many days does a business website design take to complete?",
+    answer: "A custom business website takes approximately 5 to 10 business days from kick-off to official launch. This includes layout design, mobile optimization, WhatsApp integration, content uploading, testing across devices, and domain configuration.",
+    highlightText: "Typical turnaround: 5 – 10 Days"
+  },
+
+  // Pricing & Payments
+  {
+    id: "faq-pricing-rates",
+    category: "pricing",
+    categoryLabel: "Pricing & Payments",
+    question: "How is pricing calculated for your digital services?",
+    answer: "Pricing is kept transparent and affordable for local small businesses in Tamale and across Ghana. Projects are quoted based on work scope (e.g. single flyer vs monthly package, 1-page website vs multi-page platform). You will receive an upfront quote with no hidden fees.",
+    highlightText: "Fixed Upfront Quotes • No Hidden Charges"
+  },
+  {
+    id: "faq-pricing-methods",
+    category: "pricing",
+    categoryLabel: "Pricing & Payments",
+    question: "What payment methods do you accept?",
+    answer: "We accept all major Ghanaian payment options including Mobile Money (MTN MoMo, Telecel Cash, AirtelTigo Money) and Direct Bank Wire Transfer. Receipts are issued upon payment confirmation.",
+    highlightText: "MTN MoMo • Telecel Cash • Bank Transfer"
+  },
+  {
+    id: "faq-pricing-deposit",
+    category: "pricing",
+    categoryLabel: "Pricing & Payments",
+    question: "Is an upfront deposit required before starting a project?",
+    answer: "Yes, a 50% deposit is required to lock in your project slot and begin work. The remaining 50% balance is paid only after you inspect and approve the completed project before final delivery.",
+    highlightText: "50% Initial Deposit • 50% On Completion"
+  },
+
+  // Delivery & Process
+  {
+    id: "faq-delivery-format",
+    category: "delivery",
+    categoryLabel: "Delivery & Process",
+    question: "How will my completed files or website be delivered to me?",
+    answer: "Graphics and flyers are delivered in ultra-high resolution formats (PNG, JPG, print-ready PDF) via WhatsApp and Google Drive links. Video projects are delivered as high-definition MP4 files optimized for social media upload. Websites are deployed live on high-speed servers with full domain setup.",
+    highlightText: "WhatsApp • Google Drive • Live Web Link"
+  },
+  {
+    id: "faq-delivery-revisions",
+    category: "delivery",
+    categoryLabel: "Delivery & Process",
+    question: "Are revisions included if I need changes made to my design or video?",
+    answer: "Yes! Every project includes up to 2 to 3 rounds of free revisions. I work closely with you to adjust colors, text, placement, or details until you are 100% satisfied with the outcome.",
+    highlightText: "2 – 3 Free Revision Rounds Included"
+  },
+  {
+    id: "faq-delivery-support",
+    category: "delivery",
+    categoryLabel: "Delivery & Process",
+    question: "Do you offer post-delivery support and updates for websites and graphics?",
+    answer: "Absolutely. For websites, technical support and minor updates are provided free for the first 30 days after launch. For ongoing design needs, monthly content retainers are available so your business stays consistently active online.",
+    highlightText: "30 Days Free Post-Launch Support"
+  },
+
+  // General
+  {
+    id: "faq-general-start",
+    category: "general",
+    categoryLabel: "Getting Started",
+    question: "How do I get started with my project right now?",
+    answer: "Getting started is quick and easy! Simply scroll to the Contact section on this page, fill out the brief form, or click the WhatsApp button (0599003995) to chat with me directly. We will discuss your goals and begin right away.",
+    highlightText: "Direct WhatsApp: 0599003995"
+  }
+];
+

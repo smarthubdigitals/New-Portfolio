@@ -87,13 +87,31 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedServiceP
       try {
         const web3FormData = new FormData();
         web3FormData.append('access_key', web3Key);
-        web3FormData.append('name', formData.fullName);
-        web3FormData.append('email', formData.email || 'smarthubdigitals@gmail.com');
-        web3FormData.append('phone', formData.phoneWhatsapp);
-        web3FormData.append('business_name', formData.businessName || 'N/A');
-        web3FormData.append('service_needed', formData.serviceNeeded);
-        web3FormData.append('message', formData.projectDetails);
-        web3FormData.append('subject', `New Project Request from ${formData.fullName} - ${formData.serviceNeeded}`);
+        web3FormData.append('from_name', `${formData.fullName} (Portfolio Lead)`);
+        web3FormData.append('subject', `🚀 New Lead: ${formData.fullName} - ${formData.serviceNeeded}`);
+
+        if (formData.email && formData.email.trim()) {
+          web3FormData.append('replyto', formData.email.trim());
+        }
+
+        // Clean & format WhatsApp link for instant 1-click chatting from inbox
+        const rawPhone = formData.phoneWhatsapp.trim().replace(/[^0-9]/g, '');
+        const formattedPhone = rawPhone.startsWith('0')
+          ? '233' + rawPhone.substring(1)
+          : rawPhone.startsWith('233') ? rawPhone : '233' + rawPhone;
+        
+        const directWaUrl = `https://wa.me/${formattedPhone}?text=${encodeURIComponent(`Hi ${formData.fullName}, thank you for reaching out regarding your ${formData.serviceNeeded} project!`)}`;
+
+        // Human-friendly field names for Web3Forms email table layout
+        web3FormData.append('Full Name', formData.fullName);
+        web3FormData.append('Phone / WhatsApp', `${formData.phoneWhatsapp}`);
+        web3FormData.append('Email Address', formData.email || 'Not provided');
+        web3FormData.append('Business / Brand Name', formData.businessName || 'Not specified');
+        web3FormData.append('Service Requested', formData.serviceNeeded);
+        web3FormData.append('Project Details & Requirements', formData.projectDetails);
+        web3FormData.append('1-Click WhatsApp Reply Link', directWaUrl);
+        web3FormData.append('Sent From', 'Abdul Waheed Digital Solutions Portfolio Website');
+        web3FormData.append('Submitted At', `${new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })} at ${new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })} (GMT)`);
 
         const wRes = await fetch('https://api.web3forms.com/submit', {
           method: 'POST',
