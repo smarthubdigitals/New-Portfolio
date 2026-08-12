@@ -9,10 +9,10 @@ export const siteConfig = {
   brandSubtitle: "Digital Solutions Specialist",
   profession: "Digital Skills Specialist / Digital Solutions Provider",
   location: "Tamale, Ghana 🇬🇭",
-  email: "abdulwaheed.digital@gmail.com", // Replace with Abdul's email
+  email: "smarthubdigitals@gmail.com",
   profileImage: profileImageBase64,
-  whatsappNumber: "233500000000", // Format: Country code without + (e.g. 233541234567)
-  whatsappDisplayNumber: "+233 50 000 0000",
+  whatsappNumber: "233599003995", // Ghana country code 233 + 599003995
+  whatsappDisplayNumber: "+233 59 900 3995",
   availableForFreelance: true,
   
   // SEO & Head Metadata
@@ -23,9 +23,9 @@ export const siteConfig = {
   // Abdul can either use Web3Forms (Free API key from web3forms.com) or Formspree endpoint URL
   emailIntegration: {
     provider: 'web3forms' as 'web3forms' | 'formspree' | 'custom_api',
-    web3formsAccessKey: 'YOUR_WEB3FORMS_ACCESS_KEY', // Easily replace with key from https://web3forms.com (free)
-    formspreeEndpoint: 'https://formspree.io/f/YOUR_FORM_ID', // Alternatively use Formspree
-    directEmailRecipient: 'abdulwaheed.digital@gmail.com'
+    web3formsAccessKey: '3d8a0154-3d34-44e3-80b2-72e496331fdb',
+    formspreeEndpoint: 'https://formspree.io/f/YOUR_FORM_ID',
+    directEmailRecipient: 'smarthubdigitals@gmail.com'
   },
 
   // Hero Section Copy
