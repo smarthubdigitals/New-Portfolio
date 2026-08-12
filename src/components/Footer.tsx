@@ -20,20 +20,31 @@ export const Footer: React.FC = () => {
   )}`;
 
   return (
-    <footer className="bg-slate-900 border-t border-slate-800 text-white pt-16 pb-12 relative">
+    <footer className="bg-[#0B0F19] border-t border-slate-800 text-white pt-16 pb-12 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 pb-12 border-b border-slate-800">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 pb-12 border-b border-slate-800/80">
           
           {/* Brand Info */}
           <div className="md:col-span-5 space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-[#2563EB] flex items-center justify-center text-white font-black text-lg shadow-md">
-                {siteConfig.brandLogoText}
+              <div className="w-10 h-10 rounded-xl overflow-hidden bg-[#131C2E] border border-slate-800 flex items-center justify-center p-1 shadow-lg shrink-0">
+                {siteConfig.logoUrl ? (
+                  <img
+                    src={siteConfig.logoUrl}
+                    alt={`${siteConfig.name} Logo`}
+                    className="w-full h-full object-contain"
+                    referrerPolicy="no-referrer"
+                  />
+                ) : (
+                  <span className="font-heading text-white font-black text-lg">
+                    {siteConfig.brandLogoText}
+                  </span>
+                )}
               </div>
               <div>
-                <span className="text-xl font-extrabold text-white">{siteConfig.name}</span>
-                <p className="text-xs text-blue-400 font-semibold">Digital Solutions for Growing Businesses</p>
+                <span className="text-xl font-extrabold text-white font-heading">{siteConfig.name}</span>
+                <p className="text-xs text-blue-400 font-semibold font-heading">Digital Solutions for Growing Businesses</p>
               </div>
             </div>
 
@@ -42,20 +53,20 @@ export const Footer: React.FC = () => {
             </p>
 
             <div className="flex items-center gap-2 text-xs text-slate-300">
-              <MapPin className="w-4 h-4 text-red-400 shrink-0" />
+              <MapPin className="w-4 h-4 text-rose-400 shrink-0" />
               <span>{siteConfig.location}</span>
             </div>
           </div>
 
           {/* Quick Links */}
           <div className="md:col-span-4 space-y-3">
-            <h4 className="text-xs font-bold text-slate-300 uppercase tracking-wider">Navigation</h4>
+            <h4 className="text-xs font-bold text-slate-300 uppercase tracking-wider font-heading">Navigation</h4>
             <ul className="space-y-2 text-xs">
               {navLinks.map((link) => (
                 <li key={link.name}>
                   <a
                     href={link.href}
-                    className="text-slate-400 hover:text-white transition-colors"
+                    className="text-slate-400 hover:text-blue-400 transition-colors"
                   >
                     {link.name}
                   </a>
@@ -66,13 +77,13 @@ export const Footer: React.FC = () => {
 
           {/* Social Links */}
           <div className="md:col-span-3 space-y-3">
-            <h4 className="text-xs font-bold text-slate-300 uppercase tracking-wider">Connect & Chat</h4>
+            <h4 className="text-xs font-bold text-slate-300 uppercase tracking-wider font-heading">Connect & Chat</h4>
             <div className="flex items-center gap-3">
               <a
                 href={whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center text-emerald-400 hover:bg-[#128C7E] hover:text-white transition-all shadow-xs"
+                className="w-9 h-9 rounded-xl bg-[#131C2E] border border-slate-800 flex items-center justify-center text-emerald-400 hover:bg-emerald-600 hover:text-white transition-all shadow-sm"
                 title="WhatsApp"
               >
                 <MessageCircle className="w-4 h-4" />
@@ -80,7 +91,7 @@ export const Footer: React.FC = () => {
 
               <a
                 href="#"
-                className="w-9 h-9 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center text-slate-400 hover:text-white hover:bg-slate-700 transition-all shadow-xs"
+                className="w-9 h-9 rounded-xl bg-[#131C2E] border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:bg-slate-800 transition-all shadow-sm"
                 title="Instagram (Configurable)"
               >
                 <Instagram className="w-4 h-4" />
@@ -88,7 +99,7 @@ export const Footer: React.FC = () => {
 
               <a
                 href="#"
-                className="w-9 h-9 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center text-slate-400 hover:text-white hover:bg-slate-700 transition-all shadow-xs"
+                className="w-9 h-9 rounded-xl bg-[#131C2E] border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:bg-slate-800 transition-all shadow-sm"
                 title="Facebook (Configurable)"
               >
                 <Facebook className="w-4 h-4" />
@@ -96,7 +107,7 @@ export const Footer: React.FC = () => {
 
               <a
                 href="#"
-                className="w-9 h-9 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center text-slate-400 hover:text-white hover:bg-slate-700 transition-all shadow-xs"
+                className="w-9 h-9 rounded-xl bg-[#131C2E] border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:bg-slate-800 transition-all shadow-sm"
                 title="LinkedIn (Configurable)"
               >
                 <Linkedin className="w-4 h-4" />
@@ -115,7 +126,7 @@ export const Footer: React.FC = () => {
 
           <button
             onClick={scrollToTop}
-            className="inline-flex items-center gap-1.5 text-slate-300 hover:text-white bg-slate-800 hover:bg-slate-700 border border-slate-700 px-3 py-1.5 rounded-lg transition-colors cursor-pointer"
+            className="inline-flex items-center gap-1.5 text-slate-300 hover:text-white bg-[#131C2E] hover:bg-slate-800 border border-slate-800 px-3 py-1.5 rounded-lg transition-colors cursor-pointer font-heading"
           >
             <span>Back to top</span>
             <ArrowUp className="w-3.5 h-3.5" />

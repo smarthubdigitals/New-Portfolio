@@ -5,6 +5,7 @@ export const siteConfig = {
   // Personal & Brand Information
   name: "Abdul Waheed",
   brandLogoText: "AW",
+  logoUrl: "/WAHEED LOGO.png",
   brandSubtitle: "Digital Solutions Specialist",
   profession: "Digital Skills Specialist / Digital Solutions Provider",
   location: "Tamale, Ghana 🇬🇭",
